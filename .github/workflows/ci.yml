@@ -1,18 +1,33 @@
 name: CI Pipeline
-on: [push, pull_request]
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up environment
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run tests
-        run: pytest
-      - name: Run static analysis
-        run: sonar-scanner
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Tests
+      run: npm test
+
+    - name: Static Code Analysis with SonarQube
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        npm install -g sonar-scanner
+        sonar-scanner -Dsonar.projectKey=BibliotecaVirtual -Dsonar.organization=mi-organizacion
