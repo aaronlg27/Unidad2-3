@@ -1,0 +1,12 @@
+sonar.projectKey=aaronlg27_Unidad2-3
+sonar.organization=aaronlg27
+
+# Optional: Nombre y versión mostrados en la interfaz de SonarCloud
+sonar.projectName=Unidad2-3
+sonar.projectVersion=1.0
+
+# Directorio raíz del código fuente
+sonar.sources=.
+
+# Codificación del código fuente
+sonar.sourceEncoding=UTF-8
